@@ -56,7 +56,7 @@ impl GeyserPlugin for Plugin {
         concat!(env!("CARGO_PKG_NAME"), "-", env!("CARGO_PKG_VERSION"))
     }
 
-    fn on_load(&mut self, config_file: &str, is_reload: bool) -> PluginResult<()> {
+    fn on_load(&mut self, config_file: &str) -> PluginResult<()> {
         let config = Config::load_from_file(config_file)?;
 
         // Setup logger
@@ -76,7 +76,7 @@ impl GeyserPlugin for Plugin {
                     config.grpc,
                     config.block_fail_action,
                     config.debug_clients_http.then_some(debug_client_tx),
-                    is_reload,
+                    false,
                 )
                 .await
                 .map_err(|error| GeyserPluginError::Custom(format!("{error:?}").into()))?;
@@ -207,7 +207,8 @@ impl GeyserPlugin for Plugin {
                 ReplicaEntryInfoVersions::V0_0_1(_entry) => {
                     unreachable!("ReplicaEntryInfoVersions::V0_0_1 is not supported")
                 }
-                ReplicaEntryInfoVersions::V0_0_2(entry) => entry,
+                #[allow(unreachable_patterns)]
+                ReplicaEntryInfoVersions::V0_0_1(entry) => entry,
             };
 
             let message = Message::Entry(entry.into());

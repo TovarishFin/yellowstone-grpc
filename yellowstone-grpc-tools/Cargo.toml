@@ -1,6 +1,6 @@
 [package]
 name = "yellowstone-grpc-tools"
-version = "1.0.0-rc.11+solana.1.18.13"
+version = "1.0.0-rc.11+solana.1.17.28"
 authors = { workspace = true }
 edition = { workspace = true }
 description = "Yellowstone gRPC Tools"
@@ -61,7 +61,10 @@ tokio = { workspace = true, features = ["test-util"] }
 rdkafka = { workspace = true, features = ["sasl", "ssl"], optional = true }
 
 [target.'cfg(all(target_os = "macos", target_arch = "aarch64"))'.dependencies]
-rdkafka = { workspace = true, features = ["sasl", "ssl-vendored"], optional = true }
+rdkafka = { workspace = true, features = [
+    "sasl",
+    "ssl-vendored",
+], optional = true }
 
 [build-dependencies]
 project-root = "0.2.2"
@@ -74,4 +77,11 @@ vergen = { workspace = true, features = ["build", "rustc"] }
 default = ["google-pubsub", "kafka"]
 google-pubsub = ["google-cloud-googleapis", "google-cloud-pubsub"]
 kafka = ["const-hex", "rdkafka", "sha2"]
-scylladb = ["scylla", "serde_with", "deepsize", "uuid", "local-ip-address", "chrono"]
+scylladb = [
+    "scylla",
+    "serde_with",
+    "deepsize",
+    "uuid",
+    "local-ip-address",
+    "chrono",
+]

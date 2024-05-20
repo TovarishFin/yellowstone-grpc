@@ -8,7 +8,7 @@ use {
     anyhow::Context,
     log::{error, info},
     solana_geyser_plugin_interface::geyser_plugin_interface::{
-        ReplicaAccountInfoV3, ReplicaBlockInfoV3, ReplicaEntryInfoV2, ReplicaTransactionInfoV2,
+        ReplicaAccountInfoV3, ReplicaBlockInfoV3, ReplicaEntryInfo, ReplicaTransactionInfoV2,
         SlotStatus,
     },
     solana_sdk::{
@@ -201,18 +201,15 @@ pub struct MessageEntry {
     pub starting_transaction_index: u64,
 }
 
-impl From<&ReplicaEntryInfoV2<'_>> for MessageEntry {
-    fn from(entry: &ReplicaEntryInfoV2) -> Self {
+impl From<&ReplicaEntryInfo<'_>> for MessageEntry {
+    fn from(entry: &ReplicaEntryInfo) -> Self {
         Self {
             slot: entry.slot,
             index: entry.index,
             num_hashes: entry.num_hashes,
             hash: entry.hash.into(),
             executed_transaction_count: entry.executed_transaction_count,
-            starting_transaction_index: entry
-                .starting_transaction_index
-                .try_into()
-                .expect("failed convert usize to u64"),
+            starting_transaction_index: 0,
         }
     }
 }
