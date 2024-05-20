@@ -1,5 +1,5 @@
 {
-    "libpath": "../target/release/libyellowstone_grpc_geyser.dylib",
+    "libpath": "/home/solana/yellowstone-tvf/target/release/libyellowstone_grpc_geyser.so",
     "log": {
         "level": "info"
     },
@@ -10,16 +10,16 @@
         "snapshot_client_channel_capacity": "50_000_000",
         "channel_capacity": "100_000",
         "unary_concurrency_limit": 100,
-        "unary_disabled": false,
+        "unary_disabled": true,
         "filters": {
             "accounts": {
                 "max": 1,
                 "any": false,
-                "account_max": 10,
+                "account_max": 10000,
                 "account_reject": [
                     "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
                 ],
-                "owner_max": 10,
+                "owner_max": 10000,
                 "owner_reject": [
                     "11111111111111111111111111111111"
                 ]
