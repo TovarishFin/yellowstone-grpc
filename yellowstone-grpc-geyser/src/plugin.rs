@@ -1,3 +1,4 @@
+use once_cell::sync::OnceCell;
 use {
     crate::{
         config::Config,
@@ -15,6 +16,8 @@ use {
         sync::{mpsc, Notify},
     },
 };
+
+static VOTE_PROGRAM_ID: OnceCell<Vec<u8>> = OnceCell::new();
 
 #[derive(Debug)]
 pub struct PluginInner {
@@ -126,6 +129,14 @@ impl GeyserPlugin for Plugin {
                 }
                 ReplicaAccountInfoVersions::V0_0_3(info) => info,
             };
+
+            // skip vote accounts
+            if account.owner
+                == *VOTE_PROGRAM_ID
+                    .get_or_init(|| solana_program::vote::program::id().to_bytes().to_vec())
+            {
+                return Ok(());
+            }
 
             let message = Message::Account((account, slot, is_startup).into());
             if is_startup {

@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
 import public "solana-storage.proto";
 
 option go_package = "github.com/rpcpool/solana-geyser-grpc/golang/proto";
@@ -94,16 +95,17 @@ message SubscribeRequestPing {
 message SubscribeUpdate {
   repeated string filters = 1;
   oneof update_oneof {
-    SubscribeUpdateAccount account = 2;
-    SubscribeUpdateSlot slot = 3;
-    SubscribeUpdateTransaction transaction = 4;
-    SubscribeUpdateTransactionStatus transaction_status = 10;
-    SubscribeUpdateBlock block = 5;
-    SubscribeUpdatePing ping = 6;
-    SubscribeUpdatePong pong = 9;
-    SubscribeUpdateBlockMeta block_meta = 7;
-    SubscribeUpdateEntry entry = 8;
-  }
+      SubscribeUpdateAccount account = 2;
+      SubscribeUpdateSlot slot = 3;
+      SubscribeUpdateTransaction transaction = 4;
+      SubscribeUpdateTransactionStatus transaction_status = 10;
+      SubscribeUpdateBlock block = 5;
+      SubscribeUpdatePing ping = 6;
+      SubscribeUpdatePong pong = 9;
+      SubscribeUpdateBlockMeta block_meta = 7;
+      SubscribeUpdateEntry entry = 8;
+    }
+    google.protobuf.Timestamp timestamp = 11;
 }
 
 message SubscribeUpdateAccount {

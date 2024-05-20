@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 
-	pb "github.com/rpcpool/yellowstone-grpc/examples/golang/proto"
+	pb "github.com/rpcpool/solana-geyser-grpc/golang/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
@@ -148,7 +148,10 @@ func grpc_subscribe(conn *grpc.ClientConn) {
 			subscription.Slots = make(map[string]*pb.SubscribeRequestFilterSlots)
 		}
 
-		subscription.Slots["slots"] = &pb.SubscribeRequestFilterSlots{}
+		filterByCommitment := true
+		subscription.Slots["slots"] = &pb.SubscribeRequestFilterSlots{
+			FilterByCommitment: &filterByCommitment,
+		}
 
 	}
 
@@ -210,6 +213,7 @@ func grpc_subscribe(conn *grpc.ClientConn) {
 
 		subscription.Transactions["transactions_sub"].AccountInclude = transactionsAccountsInclude
 		subscription.Transactions["transactions_sub"].AccountExclude = transactionsAccountsExclude
+		subscription.Commitment = pb.CommitmentLevel_PROCESSED.Enum()
 	}
 
 	subscriptionJson, err := json.Marshal(&subscription)
@@ -241,7 +245,10 @@ func grpc_subscribe(conn *grpc.ClientConn) {
 		if i == *resub {
 			subscription = pb.SubscribeRequest{}
 			subscription.Slots = make(map[string]*pb.SubscribeRequestFilterSlots)
-			subscription.Slots["slots"] = &pb.SubscribeRequestFilterSlots{}
+			filterByCommitment := true
+			subscription.Slots["slots"] = &pb.SubscribeRequestFilterSlots{
+				FilterByCommitment: &filterByCommitment,
+			}
 			stream.Send(&subscription)
 		}
 
