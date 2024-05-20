@@ -204,10 +204,6 @@ impl GeyserPlugin for Plugin {
         self.with_inner(|inner| {
             #[allow(clippy::infallible_destructuring_match)]
             let entry = match entry {
-                ReplicaEntryInfoVersions::V0_0_1(_entry) => {
-                    unreachable!("ReplicaEntryInfoVersions::V0_0_1 is not supported")
-                }
-                #[allow(unreachable_patterns)]
                 ReplicaEntryInfoVersions::V0_0_1(entry) => entry,
             };
 
