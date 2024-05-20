@@ -202,7 +202,6 @@ impl GeyserPlugin for Plugin {
 
     fn notify_entry(&self, entry: ReplicaEntryInfoVersions) -> PluginResult<()> {
         self.with_inner(|inner| {
-            #[allow(clippy::infallible_destructuring_match)]
             let entry = match entry {
                 ReplicaEntryInfoVersions::V0_0_1(entry) => entry,
             };
