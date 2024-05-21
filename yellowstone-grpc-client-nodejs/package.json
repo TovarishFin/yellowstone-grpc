@@ -5,6 +5,7 @@
   "author": "Triton One",
   "description": "Yellowstone gRPC Geyser Node.js Client",
   "main": "dist/index.js",
+  "homepage": "https://triton.one",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "npm run grpc-generate && tsc -p .",
@@ -24,9 +25,8 @@
   "keywords": [
     "solana"
   ],
-  "homepage": "https://triton.one",
   "dependencies": {
-    "@grpc/grpc-js": "^1.8.0"
+    "@grpc/grpc-js": "1.8.17"
   },
   "devDependencies": {
     "prettier": "^2.8.3",

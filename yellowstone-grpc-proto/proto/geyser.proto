@@ -95,17 +95,17 @@ message SubscribeRequestPing {
 message SubscribeUpdate {
   repeated string filters = 1;
   oneof update_oneof {
-      SubscribeUpdateAccount account = 2;
-      SubscribeUpdateSlot slot = 3;
-      SubscribeUpdateTransaction transaction = 4;
-      SubscribeUpdateTransactionStatus transaction_status = 10;
-      SubscribeUpdateBlock block = 5;
-      SubscribeUpdatePing ping = 6;
-      SubscribeUpdatePong pong = 9;
-      SubscribeUpdateBlockMeta block_meta = 7;
-      SubscribeUpdateEntry entry = 8;
-    }
-    google.protobuf.Timestamp timestamp = 11;
+    SubscribeUpdateAccount account = 2;
+    SubscribeUpdateSlot slot = 3;
+    SubscribeUpdateTransaction transaction = 4;
+    SubscribeUpdateTransactionStatus transaction_status = 10;
+    SubscribeUpdateBlock block = 5;
+    SubscribeUpdatePing ping = 6;
+    SubscribeUpdatePong pong = 9;
+    SubscribeUpdateBlockMeta block_meta = 7;
+    SubscribeUpdateEntry entry = 8;
+  }
+  google.protobuf.Timestamp timestamp = 11;
 }
 
 message SubscribeUpdateAccount {

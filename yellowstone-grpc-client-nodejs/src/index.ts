@@ -53,6 +53,8 @@ export {
   SubscribeUpdateTransactionInfo,
 } from "./grpc/geyser";
 
+export { ClientDuplexStream } from "@grpc/grpc-js";
+
 export default class Client {
   _client: GeyserClient;
 
