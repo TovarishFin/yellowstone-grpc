@@ -110,7 +110,7 @@ message SubscribeUpdate {
     SubscribeUpdateBlockMeta block_meta = 7;
     SubscribeUpdateEntry entry = 8;
   }
-  google.protobuf.Timestamp timestamp = 11;
+  Timestamp timestamp = 11;
 }
 
 message SubscribeUpdateAccount {
