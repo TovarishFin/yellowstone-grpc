@@ -1,11 +1,16 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
 import public "solana-storage.proto";
 
 option go_package = "github.com/rpcpool/solana-geyser-grpc/golang/proto";
 
 package geyser;
+
+// jacked from the official repo since not easily accessible... grr...
+message Timestamp {
+  int64 seconds = 1;
+  int32 nanos = 2;
+}
 
 service Geyser {
   rpc Subscribe(stream SubscribeRequest) returns (stream SubscribeUpdate) {}
